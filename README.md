@@ -1,0 +1,4 @@
+collections
+===========
+
+Container data types.
