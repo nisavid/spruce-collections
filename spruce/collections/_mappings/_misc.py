@@ -7,8 +7,8 @@ from collections \
     import Mapping as _Mapping, MutableMapping as _MutableMapping, \
            OrderedDict as _OrderedDict
 
-from nisavid.lang import require_isinstance as _require_isinstance
 import multimap as _multimap
+from spruce.lang import require_isinstance as _require_isinstance
 
 
 class _mdict_base(_multimap.MultiMap):
@@ -387,11 +387,11 @@ class typeddict(_typeddict_base, _MutableMapping):
     validates its keys and values.
 
     The keys and values assigned to this mapping are validated using
-    :func:`nisavid.lang.require_isinstance()
-    <nisavid.lang._datatypes._checking.require_isinstance>`.  It is
+    :func:`spruce.lang.require_isinstance()
+    <spruce.lang._datatypes._checking.require_isinstance>`.  It is
     recommended to specify *keytype* and *valuetype* as subclasses of
-    :class:`nisavid.lang.AnnotatedType
-    <nisavid.lang._datatypes._annotated.AnnotatedType>` to ensure good error
+    :class:`spruce.lang.AnnotatedType
+    <spruce.lang._datatypes._annotated.AnnotatedType>` to ensure good error
     messages in case validation fails and normalization is not available.
 
     If validation fails for a key or value, then it is optionally normalized
@@ -407,7 +407,7 @@ class typeddict(_typeddict_base, _MutableMapping):
         :samp:`{keytype}({K})`.
 
       * If *key_converter* is not null but false, then an error is raised as
-        by :samp:`nisavid.lang.require_isinstance({K}, {keytype})`.
+        by :samp:`spruce.lang.require_isinstance({K}, {keytype})`.
 
     :param mapping_or_items:
         A mapping or item sequence of initial items.

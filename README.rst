@@ -1,6 +1,5 @@
+##################
+Spruce-collections
+##################
 
-###################
-nisavid-collections
-###################
-
-Container data types.
+Spruce-collections is a Python library of container data types.
