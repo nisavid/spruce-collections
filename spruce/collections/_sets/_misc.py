@@ -81,8 +81,7 @@ class oset(_oset.oset):
     """
 
     def __repr__(self):
-        return '{}({!r})'.format(self.__class__.__name__,
-                                 [item for item in self])
+        return '{}({!r})'.format(self.__class__.__name__, list(self))
 
     def __str__(self):
         return '>{{{}}}'.format(', '.join(str(item) for item in self))

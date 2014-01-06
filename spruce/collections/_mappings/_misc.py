@@ -6,6 +6,8 @@ __docformat__ = "restructuredtext"
 from collections \
     import Mapping as _Mapping, MutableMapping as _MutableMapping, \
            OrderedDict as _OrderedDict
+from functools import reduce as _reduce
+from operator import xor as _xor
 
 import multimap as _multimap
 from spruce.lang import require_isinstance as _require_isinstance
@@ -180,15 +182,15 @@ class defaultmapping(_MutableMapping):
         return len(self.mapping)
 
     def __repr__(self):
-        return '{}({}, {})'.format(self.__class__.__name__, repr(self.mapping),
-                                   repr(self.default_factory))
+        return '{}({!r}, {!r})'.format(self.__class__.__name__, self.mapping,
+                                       self.default_factory)
 
     def __setitem__(self, key, value):
         self.mapping[key] = value
 
     def __str__(self):
-        return '{}({}, {})'.format(self.__class__.__name__, str(self.mapping),
-                                   str(self.default_factory))
+        return '{}({}, {})'.format(self.__class__.__name__, self.mapping,
+                                   self.default_factory)
 
     @property
     def default_factory(self):
@@ -276,10 +278,8 @@ class frozenodict(_Mapping):
 
     def __hash__(self):
         if self._hash is None:
-            self._hash = 0
-            for key, value in self.iteritems():
-                self._hash ^= hash(key)
-                self._hash ^= hash(value)
+            self._hash = _reduce(_xor,
+                                 (hash(pair) for pair in self.iteritems()))
         return self._hash
 
     def __iter__(self):
@@ -313,13 +313,9 @@ class frozentypeddict(_typeddict_base):
 
     def __hash__(self):
         if self._hash is None:
-            self._hash = 0
-            self._hash ^= self._dicttype()
-            self._hash ^= self.keytype
-            self._hash ^= self.valuetype
-            for key, value in self.iteritems():
-                self._hash ^= hash(key)
-                self._hash ^= hash(value)
+            self._hash = _reduce(_xor,
+                                 (hash(pair) for pair in self.iteritems()),
+                                 hash(self._dicttype()))
         return self._hash
 
     def __str__(self):
@@ -400,7 +396,7 @@ class typeddict(_typeddict_base, _MutableMapping):
     assigned for which :samp:`isinstance({K}, {keytype})`
     returns false, then the following operation takes place:
 
-      * If *key_converter* is nether null nor false, then the assigned key
+      * If *key_converter* is neither null nor false, then the assigned key
         is :samp:`{key_converter}({K})`.
 
       * If *key_converter* is null, then the assigned key is
@@ -433,13 +429,13 @@ class typeddict(_typeddict_base, _MutableMapping):
     :raise TypeError:
         Raised if:
 
-            * one or more of the keys of *mapping_or_items* is not an
-              instance of *keytype* and *key_converter* is false but not
-              null; or
+          * one or more of the keys of *mapping_or_items* is not an
+            instance of *keytype* and *key_converter* is false but not
+            null; or
 
-            * one or more of the values of *mapping_or_items* is not an
-              instance of *valuetype* and *value_converter* is false but not
-              null.
+          * one or more of the values of *mapping_or_items* is not an
+            instance of *valuetype* and *value_converter* is false but not
+            null.
 
     :raise:
         Other exceptions may be raised by *key_converter*, *keytype*,
