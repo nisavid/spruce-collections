@@ -3,8 +3,14 @@
 __copyright__ = "Copyright (C) 2014 Ivan D Vasin"
 __docformat__ = "restructuredtext"
 
+import exceptions as _py_exc
 
-class Error(RuntimeError):
+
+class Exception(_py_exc.Exception):
+    pass
+
+
+class Error(RuntimeError, Exception):
     pass
 
 
