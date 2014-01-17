@@ -1,4 +1,4 @@
-"""General purpose mapping data types."""
+"""Miscellaneous mapping data types"""
 
 __copyright__ = "Copyright (C) 2014 Ivan D Vasin"
 __docformat__ = "restructuredtext"
@@ -203,7 +203,7 @@ class defaultmapping(_MutableMapping):
 
 class frozendict(_Mapping):
 
-    """An immutable mapping."""
+    """An immutable mapping"""
 
     def __init__(self, *args, **kwargs):
         self._dict = dict(*args, **kwargs)
@@ -233,7 +233,7 @@ class frozendict(_Mapping):
 
 class frozenmdict(_mdict_base):
 
-    """An immutable multimap.
+    """An immutable multimap
 
     .. seealso:: :class:`multimap.MultiMap` from :pypi:`multimap`
 
@@ -259,7 +259,7 @@ class frozenmdict(_mdict_base):
 
 class frozenodict(_Mapping):
 
-    """An immutable ordered mapping.
+    """An immutable ordered mapping
 
     .. seealso:: :class:`odict`
 
@@ -293,7 +293,7 @@ class frozenodict(_Mapping):
 
 class frozentypeddict(_typeddict_base):
 
-    """An immutable typed mapping.
+    """An immutable typed mapping
 
     .. seealso:: :class:`typeddict`
 
@@ -319,9 +319,12 @@ class frozentypeddict(_typeddict_base):
 
 
 class frozentypedmdict(frozentypeddict):
-    """An immutable typed multimap.
+    """An immutable typed multimap
 
-    .. seealso:: :class:`typedmdict`
+    .. seealso:: :class:`frozentypeddict`, :class:`frozenmdict`
+
+    .. note:: **TODO:**
+        support the full API of :class:`frozenmdict`
 
     """
     @classmethod
@@ -330,9 +333,9 @@ class frozentypedmdict(frozentypeddict):
 
 
 class frozentypedodict(frozentypeddict):
-    """An immutable typed ordered mapping.
+    """An immutable typed ordered mapping
 
-    .. seealso:: :class:`typedodict`
+    .. seealso:: :class:`frozentypeddict`, :class:`frozenodict`
 
     """
     @classmethod
@@ -341,7 +344,7 @@ class frozentypedodict(frozentypeddict):
 
 
 class mdict(_mdict_base, _multimap.MutableMultiMap):
-    """A multimap.
+    """A multimap
 
     If a *mapping_or_items* is given, then the multimap is initialized with
     the items in it.  If the *mapping_or_items* is a multimap (that is, if
@@ -362,7 +365,7 @@ class mdict(_mdict_base, _multimap.MutableMultiMap):
 
 
 class odict(_odict_base):
-    """An ordered mapping.
+    """An ordered mapping
 
     .. seealso:: :class:`collections.OrderedDict`
 
@@ -372,7 +375,7 @@ class odict(_odict_base):
 
 class typeddict(_typeddict_base, _MutableMapping):
 
-    """A typed mapping.
+    """A typed mapping
 
     This is a mapping from keys of a particular type to values of a
     particular type.  In addition to the basic mapping functionality, it
@@ -404,8 +407,8 @@ class typeddict(_typeddict_base, _MutableMapping):
     :param mapping_or_items:
         A mapping or item sequence of initial items.
     :type mapping_or_items:
-        ~\ {(~\ *keytype* or ~\ *key_converter*):
-                (~\ *valuetype* or ~\ *value_converter*))}
+        ~{(~\ *keytype* or ~\ *key_converter*): \
+              (~\ *valuetype* or ~\ *value_converter*)}
         or null
 
     :param type keytype:
@@ -448,9 +451,12 @@ class typeddict(_typeddict_base, _MutableMapping):
 
 
 class typedmdict(typeddict):
-    """A typed multimap.
+    """A typed multimap
 
     .. seealso:: :class:`typeddict`, :class:`mdict`
+
+    .. note:: **TODO:**
+        support the full API of :class:`mdict`
 
     """
     @classmethod
@@ -459,7 +465,7 @@ class typedmdict(typeddict):
 
 
 class typedodict(typeddict):
-    """A typed ordered mapping.
+    """A typed ordered mapping
 
     .. seealso:: :class:`typeddict`, :class:`odict`
 

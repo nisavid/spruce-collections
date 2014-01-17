@@ -1,4 +1,4 @@
-"""Mapping data types.
+"""Mapping data types
 
 A mapping is a set of *(key, value)* pairs.  A mapping data type is a
 container that associates zero or more objects with each item of some

@@ -1,4 +1,4 @@
-"""Universalizable set data types."""
+"""Universalizable set data types"""
 
 __copyright__ = "Copyright (C) 2014 Ivan D Vasin"
 __docformat__ = "restructuredtext"
@@ -209,7 +209,7 @@ class uset_abc(object):
 
 class frozenuset(uset_abc, _Set):
 
-    """An immutable universalizable set.
+    """An immutable universalizable set
 
     .. seealso:: :class:`uset`
 
@@ -237,7 +237,7 @@ class frozenuset(uset_abc, _Set):
 
 class uset(uset_abc, _MutableSet):
 
-    """A universalizable set.
+    """A universalizable set
 
     A universalizable set can be universal---that is, it can represent the
     set of all possible items that it supports.
@@ -250,7 +250,7 @@ class uset(uset_abc, _MutableSet):
         The items.  The value ``'*'`` has special meaning, denoting all
         possible items.
     :type items:
-        :class:`uset` or :class:`frozenuset` or ~{object}
+        :class:`uset` or :class:`frozenuset` or ~{:obj:`object`}
         or :obj:`str` or null
 
     """
@@ -458,7 +458,7 @@ class usetset_abc(uset_abc):
 
 class frozenusetset(usetset_abc, frozenuset):
 
-    """An immutable universalizable set of immutable sets.
+    """An immutable universalizable set of immutable sets
 
     .. seealso:: :class:`frozenuset`
 
@@ -471,7 +471,7 @@ class frozenusetset(usetset_abc, frozenuset):
 
 class usetset(usetset_abc, uset):
 
-    """A universalizable set of immutable sets.
+    """A universalizable set of immutable sets
 
     .. seealso:: :class:`uset`
 

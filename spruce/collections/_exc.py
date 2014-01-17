@@ -1,4 +1,4 @@
-"""Exceptions."""
+"""Exceptions"""
 
 __copyright__ = "Copyright (C) 2014 Ivan D Vasin"
 __docformat__ = "restructuredtext"
@@ -17,7 +17,7 @@ class Error(RuntimeError, Exception):
 class UnsupportedUniversalSetOperation(Error):
 
     """
-    A finite set operation was attempted on a universal set.
+    A finite set operation was attempted on a universal set
 
     :param operation:
         The attempted operation.

@@ -1,4 +1,4 @@
-"""Miscellaneous set data types."""
+"""Miscellaneous set data types"""
 
 __copyright__ = "Copyright (C) 2014 Ivan D Vasin"
 __docformat__ = "restructuredtext"
@@ -12,7 +12,7 @@ import oset as _oset
 
 class set(__builtin__.set):
 
-    """A set.
+    """A set
 
     .. seealso:: :class:`set <python:set>`
 
@@ -29,7 +29,7 @@ class set(__builtin__.set):
 
 class frozenoset(_Set, _Sequence):
 
-    """An immutable ordered set.
+    """An immutable ordered set
 
     .. seealso:: :mod:`oset` from :pypi:`oset`
 

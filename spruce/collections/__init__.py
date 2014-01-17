@@ -1,4 +1,4 @@
-"""Container data types.
+"""Container data types
 
 This is an extension of :mod:`collections`.
 

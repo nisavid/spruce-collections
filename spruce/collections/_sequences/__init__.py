@@ -1,4 +1,4 @@
-"""Sequence data types.
+"""Sequence data types
 
 A sequence is an ordered multiset.  A sequence data type is a container
 in which the order of the items is significant and each item may appear
