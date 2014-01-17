@@ -25,14 +25,14 @@ class _mdict_base(_multimap.MultiMap):
 
     def __repr__(self):
         # FIXME: make printed representations behave similarly to those of
-        #     ``list`` and ``dict``, converting the delimiters of long
-        #     containers from ', ' to ',\n'
+        #   :obj:`list` and :obj:`dict`, converting the delimiters of long
+        #   containers from ', ' to ',\n'
         return '{}({!r})'.format(self.__class__.__name__, self.allitems())
 
     def __str__(self):
         # FIXME: make printed representations behave similarly to those of
-        #     ``list`` and ``dict``, converting the delimiters of long
-        #     containers from ', ' to ',\n'
+        #   :obj:`list` and :obj:`dict`, converting the delimiters of long
+        #   containers from ', ' to ',\n'
         return '+{{{}}}'.format(', '.join('{}: {}'.format(key, value)
                                           for key, value in self.allitems()))
 
@@ -41,14 +41,14 @@ class _odict_base(_OrderedDict):
 
     def __repr__(self):
         # FIXME: make printed representations behave similarly to those of
-        #     ``list`` and ``dict``, converting the delimiters of long
-        #     containers from ', ' to ',\n'
+        #   :obj:`list` and :obj:`dict`, converting the delimiters of long
+        #   containers from ', ' to ',\n'
         return '{}({!r})'.format(self.__class__.__name__, self.items())
 
     def __str__(self):
         # FIXME: make printed representations behave similarly to those of
-        #     ``list`` and ``dict``, converting the delimiters of long
-        #     containers from ', ' to ',\n'
+        #   :obj:`list` and :obj:`dict`, converting the delimiters of long
+        #   containers from ', ' to ',\n'
         return '>{{{}}}'.format(', '.join('{}: {}'.format(key, value)
                                           for key, value in self.items()))
 
@@ -99,16 +99,16 @@ class _typeddict_base(_Mapping):
 
     def __repr__(self):
         # FIXME: make printed representations behave similarly to those of
-        #     ``list`` and ``dict``, converting the delimiters of long
-        #     containers from ', ' to ',\n'
+        #   :obj:`list` and :obj:`dict`, converting the delimiters of long
+        #   containers from ', ' to ',\n'
         return '{}({!r}, keytype={!r}, valuetype={!r})'\
                 .format(self.__class__.__name__, self._dict, self.keytype,
                         self.valuetype)
 
     def __str__(self):
         # FIXME: make printed representations behave similarly to those of
-        #     ``list`` and ``dict``, converting the delimiters of long
-        #     containers from ', ' to ',\n'
+        #   :obj:`list` and :obj:`dict`, converting the delimiters of long
+        #   containers from ', ' to ',\n'
         return '{{{}}}'.format(', '.join('{}: {}'.format(key, value)
                                          for key, value in self.items()))
 
@@ -214,10 +214,8 @@ class frozendict(_Mapping):
 
     def __hash__(self):
         if self._hash is None:
-            self._hash = 0
-            for key, value in self.iteritems():
-                self._hash ^= hash(key)
-                self._hash ^= hash(value)
+            self._hash = _reduce(_xor,
+                                 (hash(pair) for pair in self.iteritems()))
         return self._hash
 
     def __iter__(self):
@@ -251,10 +249,8 @@ class frozenmdict(_mdict_base):
 
     def __hash__(self):
         if self._hash is None:
-            self._hash = 0
-            for key, value in self.iterallitems():
-                self._hash ^= hash(key)
-                self._hash ^= hash(value)
+            self._hash = _reduce(_xor,
+                                 (hash(pair) for pair in self.iterallitems()))
         return self._hash
 
     def __str__(self):

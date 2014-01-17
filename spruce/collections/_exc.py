@@ -30,11 +30,11 @@ class UnsupportedUniversalSetOperation(Error):
     """
 
     def __init__(self, operation, set, message=None, *args):
+        super(UnsupportedUniversalSetOperation, self)\
+         .__init__(operation, set, message, *args)
         self._message = message
         self._operation = operation
         self._set = set
-        super(UnsupportedUniversalSetOperation, self)\
-         .__init__(operation, set, message, *args)
 
     def __str__(self):
         message = '{} is unsupported by the universal set {!r}'\
