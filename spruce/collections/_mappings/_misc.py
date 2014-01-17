@@ -53,6 +53,13 @@ class _odict_base(_OrderedDict):
                                           for key, value in self.items()))
 
 
+class _omdict_base(_mdict_base):
+    # NOTE: this is nearly identical to :class:`_mdict_base` because that
+    #   class's underlying implementation happens to be ordered
+    def __str__(self):
+        return '>' + super(_omdict_base, self).__str__()
+
+
 class _typeddict_base(_Mapping):
 
     def __init__(self, mapping_or_items=None, keytype=None, key_converter=None,
@@ -291,6 +298,32 @@ class frozenodict(_Mapping):
         return '=' + str(self._odict)
 
 
+class frozenomdict(_omdict_base):
+
+    """An immutable ordered multimap
+
+    .. seealso:: :class:`multimap.MultiMap` from :pypi:`multimap`
+
+    :param mapping_or_items:
+        A mapping or a sequence of *(key, value)* items.
+    :type mapping_or_items: ~+{:obj:`object`: :obj:`object`} or null
+
+    """
+
+    def __init__(self, mapping_or_items=None):
+        super(frozenomdict, self).__init__(mapping_or_items)
+        self._hash = None
+
+    def __hash__(self):
+        if self._hash is None:
+            self._hash = _reduce(_xor,
+                                 (hash(pair) for pair in self.iterallitems()))
+        return self._hash
+
+    def __str__(self):
+        return '=' + super(frozenomdict, self).__str__()
+
+
 class frozentypeddict(_typeddict_base):
 
     """An immutable typed mapping
@@ -343,6 +376,20 @@ class frozentypedodict(frozentypeddict):
         return frozenodict
 
 
+class frozentypedomdict(frozentypeddict):
+    """An immutable typed ordered multimap
+
+    .. seealso:: :class:`frozentypeddict`, :class:`frozenomdict`
+
+    .. note:: **TODO:**
+        support the full API of :class:`frozenomdict`
+
+    """
+    @classmethod
+    def _dicttype(cls):
+        return frozenomdict
+
+
 class mdict(_mdict_base, _multimap.MutableMultiMap):
     """A multimap
 
@@ -368,6 +415,15 @@ class odict(_odict_base):
     """An ordered mapping
 
     .. seealso:: :class:`collections.OrderedDict`
+
+    """
+    pass
+
+
+class omdict(_omdict_base, _multimap.MutableMultiMap):
+    """An ordered multimap
+
+    .. seealso:: :class:`mdict`
 
     """
     pass
@@ -473,3 +529,17 @@ class typedodict(typeddict):
     @classmethod
     def _dicttype(cls):
         return odict
+
+
+class typedomdict(typeddict):
+    """A typed ordered multimap
+
+    .. seealso:: :class:`typeddict`, :class:`omdict`
+
+    .. note:: **TODO:**
+        support the full API of :class:`omdict`
+
+    """
+    @classmethod
+    def _dicttype(cls):
+        return omdict
