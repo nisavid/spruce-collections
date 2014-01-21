@@ -16,4 +16,4 @@ sequence_, and set_ data types.
     http://docs.python.org/2/library/stdtypes.html#sequence-types-str-unicode-list-tuple-bytearray-buffer-xrange
 
 .. _set: \
-    http://docs.python.org/2/library/stdtypes.html#set-types-set-frozenset.html
+    http://docs.python.org/2/library/stdtypes.html#set-types-set-frozenset
