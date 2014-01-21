@@ -50,7 +50,7 @@ TROVE_CLASSIFIERS = \
 
 SETUP_DEPS = ()
 
-INSTALL_DEPS = ('multimap', 'oset')
+INSTALL_DEPS = ('multimap', 'oset', 'spruce-lang')
 
 EXTRAS_DEPS = {}
 
