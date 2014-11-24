@@ -3,7 +3,7 @@
 __copyright__ = "Copyright (C) 2014 Ivan D Vasin"
 __docformat__ = "restructuredtext"
 
-import abc as _abc
+from abc import ABCMeta as _ABCMeta, abstractmethod as _abstractmethod
 from collections import MutableSet as _MutableSet, Set as _Set
 from functools import total_ordering as _total_ordering
 from itertools import product as _product
@@ -15,7 +15,7 @@ from .. import _exc
 @_total_ordering
 class uset_abc(object):
 
-    __metaclass__ = _abc.ABCMeta
+    __metaclass__ = _ABCMeta
 
     def __init__(self, items=None):
         if not items:
@@ -146,7 +146,7 @@ class uset_abc(object):
     def copy(self):
         return self.__class__(self._items.copy())
 
-    @_abc.abstractmethod
+    @_abstractmethod
     def frozen(self):
         pass
 
@@ -179,11 +179,11 @@ class uset_abc(object):
         else:
             return self._items
 
-    @_abc.abstractmethod
+    @_abstractmethod
     def unfrozen(self):
         pass
 
-    @_abc.abstractmethod
+    @_abstractmethod
     def unfrozen_copy(self):
         pass
 
@@ -194,7 +194,7 @@ class uset_abc(object):
         return frozenuset
 
     @classmethod
-    @_abc.abstractmethod
+    @_abstractmethod
     def _items_class(cls):
         pass
 
@@ -348,7 +348,7 @@ class uset(uset_abc, _MutableSet):
 
 class usetset_abc(uset_abc):
 
-    __metaclass__ = _abc.ABCMeta
+    __metaclass__ = _ABCMeta
 
     def __init__(self, items=()):
         if not items or isinstance(items, (self._frozen_class(),
@@ -442,7 +442,7 @@ class usetset_abc(uset_abc):
         return frozenusetset
 
     @classmethod
-    @_abc.abstractmethod
+    @_abstractmethod
     def _item_class(cls):
         pass
 
