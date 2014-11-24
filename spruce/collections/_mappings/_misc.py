@@ -10,7 +10,7 @@ from functools import reduce as _reduce
 from operator import xor as _xor
 
 import multimap as _multimap
-from spruce.lang import require_isinstance as _require_isinstance
+from spruce.types import require_isinstance as _require_isinstance
 
 
 class _mdict_base(_multimap.MultiMap):
